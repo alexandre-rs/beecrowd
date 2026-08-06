@@ -131,18 +131,15 @@ fun main(args: Array<String>) {
     val scanner = Scanner(System.`in`)
     do {
         val line = scanner.nextLine()
-        val indexes = line.mapIndexedNotNull { index, ch -> if (ch == '?') index else null }
-        println("? indexes : $indexes")
-        val text = line.replace("?", "")
-        // 1. Constrói a estrutura base em O(n log^2 n)
-        val sa = buildSuffixArray(text)
-        // 2. Extrai as sobreposições (LCP) em O(n)
-        val (lcp, rank) = buildLCPAndRank(text, sa)
-        println("SA:  ${sa.joinToString()}")
-        for(i in 0 until sa.size) {
-            println(text.substring(sa[i]))
+        var countLetters = 0
+        var aux: Int = 0
+        for (char in line) {
+            if (char != '?') {
+                countLetters++
+            } else {
+                println("Count: $countLetters")
+                aux = countLetters
+            }
         }
-        println("RANK: ${rank.joinToString()}")
-        println("LCP: ${lcp.joinToString()}")
     } while (scanner.hasNextLine())
 }
